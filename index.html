@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agni AI</title>
+<meta name="description" content="Agni runs open AI models on your own computer: one click to install, checked against your hardware, private by design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+body { margin: 0; }
+/* Layout: a dark "console" page. Split hero (claim + a live-looking store card), then proof sections that each answer one question a newcomer asks. Single dark look, by choice: it matches the app. */
+:root {
+  color-scheme: dark;
+  --bg: #0B0D12;
+  --panel: #141822;
+  --panel-2: #1B2030;
+  --line: #262C3C;
+  --text: #ECEEF4;
+  --muted: #9BA3B6;
+  --ember: #B33A1A;
+  --flame: #F26B21;
+  --glow: #FF9A3C;
+  --gold: #FFC24B;
+  --on-accent: #1B0E06;
+  --green: #38D39F;
+  --amber: #F5B544;
+  --red: #E86A6A;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+body {
+  background:
+    radial-gradient(900px 520px at 78% -8%, rgba(242, 107, 33, 0.16), transparent 62%),
+    radial-gradient(700px 420px at 0% 30%, rgba(179, 58, 26, 0.10), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--gold); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+section { padding-block: 72px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; }
+h3 { font-size: 20px; font-weight: 700; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 62ch; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--glow); }
+.section-head { display: grid; gap: 14px; margin-bottom: 40px; }
+
+/* ---------- Header ---------- */
+.site-header { padding-block: 22px; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--text); text-decoration: none; }
+.brand svg { filter: drop-shadow(0 0 14px rgba(242, 107, 33, 0.45)); }
+.site-nav { display: flex; gap: 22px; flex-wrap: wrap; font-size: 15px; }
+.site-nav a { color: var(--muted); text-decoration: none; }
+.site-nav a:hover { color: var(--text); }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: 40px 80px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(44px, 7vw, 84px); font-weight: 800; letter-spacing: -0.035em; }
+.hero h1 em { font-style: normal; background: linear-gradient(100deg, var(--flame), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lede { font-size: 19px; margin-top: 22px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 48px; padding: 12px 22px; border-radius: 12px;
+  font: 600 16px var(--font-body); text-decoration: none; cursor: pointer;
+  border: 1px solid var(--line); background: var(--panel); color: var(--text);
+}
+.btn-primary { border: 0; background: linear-gradient(135deg, var(--flame), var(--gold)); color: var(--on-accent); box-shadow: 0 10px 30px rgba(242, 107, 33, 0.35); }
+.btn[aria-disabled="true"] { cursor: default; }
+.soon { font-family: var(--font-mono); font-size: 11px; padding: 2px 7px; border-radius: 999px; background: rgba(27, 14, 6, 0.18); }
+.btn:not(.btn-primary) .soon { background: var(--panel-2); color: var(--muted); }
+.hero-note { margin-top: 14px; font-size: 14px; color: var(--muted); }
+
+/* The store card mock: the hardware check is the product's core idea, so the hero shows it. */
+.mock {
+  position: relative;
+  padding: 22px; border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 40%), var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+.mock-machine { font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 14px; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.mock-machine strong { color: var(--text); font-weight: 500; }
+.model { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 14px; align-items: center; padding: 12px 0; }
+.model + .model { border-top: 1px solid var(--line); }
+.model-name { font-weight: 600; }
+.model-meta { grid-column: 2; font-size: 13px; color: var(--muted); }
+.dot { width: 10px; height: 10px; border-radius: 50%; grid-row: span 2; }
+.dot.great { background: var(--green); box-shadow: 0 0 10px var(--green); }
+.dot.ok { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+.dot.no { background: var(--red); }
+.fit { grid-row: span 2; font-size: 13px; font-weight: 600; text-align: right; }
+.fit.great { color: var(--green); }
+.fit.ok { color: var(--amber); }
+.fit.no { color: var(--red); }
+
+/* ---------- Benefits ---------- */
+.benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.benefit { padding: 26px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 10px; align-content: start; }
+.benefit svg { color: var(--glow); }
+.benefit p { color: var(--muted); font-size: 15.5px; }
+
+/* ---------- Steps (a real sequence, so numbered) ---------- */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.steps li { display: grid; gap: 10px; align-content: start; }
+.steps li::before {
+  counter-increment: step; content: counter(step);
+  width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+  font: 700 18px var(--font-display); color: var(--on-accent);
+  background: linear-gradient(135deg, var(--flame), var(--gold));
+}
+.steps p { color: var(--muted); font-size: 15.5px; }
+
+/* ---------- Fit legend ---------- */
+.legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.legend-item { padding: 22px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 8px; }
+.legend-item .label { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.legend-item .label .dot { grid-row: auto; }
+.legend-item p { color: var(--muted); font-size: 15px; }
+.spec { font-family: var(--font-mono); font-size: 13px; color: var(--text); }
+
+/* ---------- Comparison ---------- */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+table { width: 100%; border-collapse: collapse; min-width: 560px; background: var(--panel); }
+th, td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 14px var(--font-body); color: var(--muted); }
+th.agni { color: var(--gold); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; width: 34%; }
+td.yes { color: var(--text); }
+td.manual { color: var(--muted); }
+
+/* ---------- Sources strip ---------- */
+.sources { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.checksum { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding: 18px 20px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); overflow-wrap: anywhere; display: grid; gap: 8px; }
+.checksum .ok-line { color: var(--green); }
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; gap: 12px; max-width: 820px; }
+details { border-radius: 14px; background: var(--panel); border: 1px solid var(--line); padding: 4px 22px; }
+summary { cursor: pointer; padding-block: 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--glow); font-weight: 700; }
+details[open] summary::after { content: "–"; }
+details p { color: var(--muted); padding-bottom: 18px; font-size: 15.5px; }
+
+/* ---------- Final CTA + footer ---------- */
+.final { text-align: center; }
+.final .wrap { display: grid; justify-items: center; gap: 18px; }
+.final .cta-row { justify-content: center; margin-top: 8px; }
+footer { padding-block: 32px 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .hero .wrap, .sources { grid-template-columns: minmax(0, 1fr); }
+  .benefits, .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  section { padding-block: 52px; }
+  .benefits, .legend, .steps { grid-template-columns: minmax(0, 1fr); }
+  .site-nav { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mock { animation: rise 0.7s ease-out both; }
+  @keyframes rise { from { transform: translateY(12px); } to { transform: none; } }
+}
+</style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Agni AI: your AI, one click away">
+<meta property="og:description" content="Agni runs open AI models on your own computer: one click to install, checked against your hardware, private by design.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kellspell.github.io/agni-site/">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Agni AI home">
+      <svg width="40" height="40" viewBox="0 0 512 512" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171A23"/><stop offset="1" stop-color="#0B0D12"/></linearGradient>
+          <radialGradient id="lg-glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FF9A3C" stop-opacity="0.38"/><stop offset="1" stop-color="#FF9A3C" stop-opacity="0"/></radialGradient>
+          <linearGradient id="lg-outer" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#B33A1A"/><stop offset="0.55" stop-color="#F26B21"/><stop offset="1" stop-color="#FF9A3C"/></linearGradient>
+          <linearGradient id="lg-core" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF9A3C"/><stop offset="1" stop-color="#FFC24B"/></linearGradient>
+          <linearGradient id="lg-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.06"/></linearGradient>
+        </defs>
+        <rect width="512" height="512" rx="112" fill="url(#lg-bg)"/>
+        <circle cx="256" cy="300" r="190" fill="url(#lg-glow)"/>
+        <path d="M262 64 C280 140 384 186 384 318 A128 128 0 0 1 128 318 C128 250 162 214 190 190 C192 226 206 250 228 262 C214 196 230 120 262 64 Z" fill="url(#lg-outer)"/>
+        <path d="M252 236 C266 282 316 306 316 360 A60 60 0 0 1 196 360 C196 318 228 292 252 236 Z" fill="url(#lg-core)"/>
+        <rect x="5" y="5" width="502" height="502" rx="107" fill="none" stroke="url(#lg-rim)" stroke-width="10"/>
+      </svg>
+      Agni AI
+    </a>
+    <nav class="site-nav" aria-label="Page sections">
+      <a href="#why">Why Agni</a>
+      <a href="#how">How it works</a>
+      <a href="#fit">Hardware check</a>
+      <a href="#faq">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Local AI, without the setup</p>
+        <h1>Your AI, <em>one click</em> away.</h1>
+        <p class="lede">Agni runs open AI models on your own computer. Browse a curated store, see at a glance which models your machine can handle, and start chatting. No terminal, no Python, no subscription.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#download" aria-disabled="true">Download for free <span class="soon">Coming soon</span></a>
+          <a class="btn" href="#how">See how it works</a>
+        </div>
+        <p class="hero-note">For Windows, macOS and Linux. Free to run models on your own computer.</p>
+      </div>
+
+      <div class="mock" role="img" aria-label="Agni's store showing three models: Qwen 2.5 Mini runs great, Mistral 7B runs but slower, a 70-billion-parameter model won't run on this computer.">
+        <div class="mock-machine">
+          <strong>Your computer</strong>
+          <span>16 GB memory</span>
+          <span>No graphics card</span>
+          <span>84 GB free</span>
+        </div>
+        <div class="model">
+          <span class="dot great"></span>
+          <span class="model-name">Qwen 2.5 Mini</span>
+          <span class="fit great">Runs great</span>
+          <span class="model-meta">Everyday questions and writing · 1.1 GB</span>
+        </div>
+        <div class="model">
+          <span class="dot ok"></span>
+          <span class="model-name">Mistral 7B</span>
+          <span class="fit ok">Runs, slower</span>
+          <span class="model-meta">Longer conversations · 4.4 GB</span>
+        </div>
+        <div class="model">
+          <span class="dot no"></span>
+          <span class="model-name">Llama 3.3 70B</span>
+          <span class="fit no">Too big</span>
+          <span class="model-meta">Needs about 48 GB of memory · 42 GB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why Agni</p>
+        <h2>Everything hard about local AI, handled for you.</h2>
+        <p class="lede">Running AI on your own machine usually means command lines, drivers and guesswork. Agni turns it into something that feels like an app store.</p>
+      </div>
+      <div class="benefits">
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <h3>Private by design</h3>
+          <p>Models run on your computer. Your questions, documents and answers never leave it, so it works for personal and confidential material.</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="m8.5 10 2.2 2.2L15.5 7.5"/></svg>
+          <h3>Checked against your hardware</h3>
+          <p>Agni scans your computer and marks every model green, amber or red before you download, so you never wait for gigabytes that won't run.</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7l1-7Z"/></svg>
+          <h3>One click to install</h3>
+          <p>Pick a model, press Install, watch the progress bar. Agni downloads it, checks it and sets it up. No terminal, Python or drivers to manage.</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 14l2 2 4-4"/></svg>
+          <h3>License-checked</h3>
+          <p>Every model in the store shows its license in plain words, so you know whether you can use it for work before you rely on it.</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2a3 3 0 0 0-2.8-1.7c-1.7 0-2.8.9-2.8 2.1 0 2.9 5.6 1.6 5.6 4.6 0 1.2-1.1 2.2-2.8 2.2a3.1 3.1 0 0 1-2.9-1.8M12 6v1.5M12 16.6V18"/></svg>
+          <h3>Free on your computer</h3>
+          <p>Running models on your own machine is free, with no account and no monthly fee. You pay nothing for what your hardware can do.</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12Z"/></svg>
+          <h3>Your choice of chat app</h3>
+          <p>Chat inside Agni, or install a different chat window, such as Hollama or AnythingLLM, from the Chat Apps tab. They all use the models you installed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>From download to first answer in minutes.</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Open Agni</h3>
+          <p>Agni checks your computer's memory, graphics card and free space, and sets up the engine that runs models.</p>
+        </li>
+        <li>
+          <h3>Pick a green model</h3>
+          <p>Browse by what you want to do: chat, writing, coding. Green means it runs great on your machine. Press Install.</p>
+        </li>
+        <li>
+          <h3>Start chatting</h3>
+          <p>Ask anything, right away, with nothing sent over the internet. Remove a model in one click when you're done with it.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="fit">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The hardware check</p>
+        <h2>Know before you download.</h2>
+        <p class="lede">AI models range from 1 GB to over 100 GB, and the wrong one can freeze an ordinary laptop. Agni compares what each model needs with what your computer has, and tells you in plain words.</p>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <span class="label"><span class="dot great"></span> Runs great</span>
+          <p>Fits comfortably in your memory or graphics card. Replies come quickly.</p>
+          <span class="spec">e.g. a 3B model on 16 GB</span>
+        </div>
+        <div class="legend-item">
+          <span class="label"><span class="dot ok"></span> Runs, but slower</span>
+          <p>It works, with replies taking a little longer. Fine for occasional use.</p>
+          <span class="spec">e.g. a 7B model, no graphics card</span>
+        </div>
+        <div class="legend-item">
+          <span class="label"><span class="dot no"></span> Won't run well</span>
+          <p>Needs more memory or disk space than you have. Agni won't let you download it by mistake.</p>
+          <span class="spec">e.g. a 70B model on 16 GB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Agni or do it yourself</p>
+        <h2>The same models, without the homework.</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">What it takes</th><th scope="col" class="agni">With Agni</th><th scope="col">Setting it up yourself</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Installing a model</td><td class="yes">One click, with a progress bar</td><td class="manual">Command line, model files, configuration</td></tr>
+            <tr><td>Will it run on my computer?</td><td class="yes">Shown before you download</td><td class="manual">Find out after a multi-gigabyte download</td></tr>
+            <tr><td>Can I use it for work?</td><td class="yes">License shown in plain words</td><td class="manual">Read each license yourself</td></tr>
+            <tr><td>Is the download safe?</td><td class="yes">Checked against the publisher's fingerprint</td><td class="manual">Up to you</td></tr>
+            <tr><td>Cleaning up</td><td class="yes">Remove in one click</td><td class="manual">Find and delete files by hand</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap sources">
+      <div class="section-head" style="margin-bottom: 0">
+        <p class="eyebrow">Straight from the source</p>
+        <h2>Downloaded from the people who publish the models.</h2>
+        <p class="lede">Agni doesn't host copies. Each model downloads directly from Hugging Face or ModelScope, the libraries where AI labs publish their work. Before anything is installed, Agni checks that the file matches the publisher's digital fingerprint exactly.</p>
+      </div>
+      <div class="checksum" aria-label="Example of a download check">
+        <span>qwen2.5-1.5b-instruct-q4_k_m.gguf · 1.12 GB</span>
+        <span>From huggingface.co/Qwen</span>
+        <span>SHA-256 6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e</span>
+        <span class="ok-line">✓ Matches the publisher's fingerprint</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Questions</p>
+        <h2>Good to know.</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Is Agni free?</summary>
+          <p>Yes. Browsing the store, installing models and running them on your own computer is free, with no account needed. A paid option for running very large models in the cloud may come later; you'd only use it when a model is too big for your machine.</p>
+        </details>
+        <details>
+          <summary>Do I need a powerful computer or a graphics card?</summary>
+          <p>No. Small models run well on an ordinary laptop with 8 GB of memory. A graphics card or an Apple silicon Mac makes bigger models faster, and Agni's hardware check shows you exactly what your machine can handle.</p>
+        </details>
+        <details>
+          <summary>Does anything I type get sent to the internet?</summary>
+          <p>No. Once a model is installed, your conversations happen entirely on your computer. Agni only goes online to download models and to update its store.</p>
+        </details>
+        <details>
+          <summary>Where do the models come from?</summary>
+          <p>From Hugging Face and ModelScope, where AI labs such as Alibaba, Meta, Microsoft and Mistral publish them. Agni downloads them directly from there and verifies every file.</p>
+        </details>
+        <details>
+          <summary>Can I use these models for my business?</summary>
+          <p>Many of them, yes. Each model in the store shows its license and whether commercial use is allowed, allowed with conditions, or not allowed, so you can choose with confidence.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" id="download">
+    <div class="wrap">
+      <h2>Bring AI home.</h2>
+      <p class="lede">Agni is in early development. Downloads for Windows, macOS and Linux are coming soon.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#download" aria-disabled="true">Download for free <span class="soon">Coming soon</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Agni AI · Local-first · License-aware · Hardware-matched</span>
+    <span>Models are published by their creators on Hugging Face and ModelScope.</span>
+  </div>
+</footer>
+</body>
+</html>

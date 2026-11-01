@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512">
+  <!-- Agni AI app icon: "The Ember". Source for `npx tauri icon design/agni-icon.svg`. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171A23"/>
+      <stop offset="1" stop-color="#0B0D12"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FF9A3C" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#FF9A3C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="outer" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#B33A1A"/>
+      <stop offset="0.55" stop-color="#F26B21"/>
+      <stop offset="1" stop-color="#FF9A3C"/>
+    </linearGradient>
+    <!-- Light from above: a sheen on the tile, a rim to outline it on dark taskbars, shade at the bottom. -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.8" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="0.5" stop-color="#FFB37A" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#FF9A3C"/>
+      <stop offset="1" stop-color="#FFC24B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="112" fill="url(#sheen)"/>
+  <circle cx="256" cy="300" r="190" fill="url(#glow)"/>
+  <path d="M262 64 C280 140 384 186 384 318 A128 128 0 0 1 128 318 C128 250 162 214 190 190 C192 226 206 250 228 262 C214 196 230 120 262 64 Z" fill="url(#outer)"/>
+  <path d="M252 236 C266 282 316 306 316 360 A60 60 0 0 1 196 360 C196 318 228 292 252 236 Z" fill="url(#core)"/>
+  <rect x="5" y="5" width="502" height="502" rx="107" fill="none" stroke="url(#rim)" stroke-width="10"/>
+</svg>
