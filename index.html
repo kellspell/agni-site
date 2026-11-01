@@ -167,6 +167,19 @@ details p { color: var(--muted); padding-bottom: 18px; font-size: 15.5px; }
 .final { text-align: center; }
 .final .wrap { display: grid; justify-items: center; gap: 18px; }
 .final .cta-row { justify-content: center; margin-top: 8px; }
+.platforms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; width: 100%; margin-top: 28px; text-align: left; }
+.platform { display: grid; gap: 10px; align-content: start; padding: 24px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); }
+.platform.detected { border-color: rgba(242, 107, 33, 0.6); box-shadow: 0 0 0 1px rgba(242, 107, 33, 0.25), 0 16px 40px rgba(242, 107, 33, 0.12); }
+.platform .req { color: var(--muted); font-size: 14px; }
+.platform .btn { justify-content: center; }
+.platform .detected-label { font-family: var(--font-mono); font-size: 11px; color: var(--glow); text-transform: uppercase; letter-spacing: 0.08em; }
+.platform .alt { font-size: 14px; }
+.platform .note { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.platform code { font-family: var(--font-mono); font-size: 12px; }
+.size { color: var(--muted); font-weight: 400; font-size: 13px; }
+.fine { font-size: 14px; color: var(--muted); }
+.unavailable { pointer-events: none; opacity: 0.55; }
+@media (max-width: 900px) { .platforms { grid-template-columns: minmax(0, 1fr); } }
 footer { padding-block: 32px 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
@@ -227,7 +240,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <h1>Your AI, <em>one click</em> away.</h1>
         <p class="lede">Agni runs open AI models on your own computer. Browse a curated store, see at a glance which models your machine can handle, and start chatting. No terminal, no Python, no subscription.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#download" aria-disabled="true">Download for free <span class="soon">Coming soon</span></a>
+          <a class="btn btn-primary" id="hero-download" href="#download">Download for free</a>
           <a class="btn" href="#how">See how it works</a>
         </div>
         <p class="hero-note">For Windows, macOS and Linux. Free to run models on your own computer.</p>
@@ -427,10 +440,36 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   <section class="final" id="download">
     <div class="wrap">
       <h2>Bring AI home.</h2>
-      <p class="lede">Agni is in early development. Downloads for Windows, macOS and Linux are coming soon.</p>
+      <p class="lede">Free for Windows, macOS and Linux. <span id="release-version">Agni is an early test version.</span></p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#download" aria-disabled="true">Download for free <span class="soon">Coming soon</span></a>
+        <a class="btn btn-primary" id="main-download" href="#platforms">Download for free</a>
       </div>
+
+      <div class="platforms" id="platforms">
+        <article class="platform" data-os="windows">
+          <h3>Windows</h3>
+          <p class="req">Windows 10 or 11, 64-bit</p>
+          <a class="btn dl" data-asset="Agni-AI-Browser-windows-x64-setup.exe" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-windows-x64-setup.exe">Installer (.exe)</a>
+          <a class="alt dl" data-asset="Agni-AI-Browser-windows-x64.msi" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-windows-x64.msi">.msi package, for IT-managed computers</a>
+          <p class="note">Not code-signed yet. If Windows says "Windows protected your PC", click <strong>More info</strong>, then <strong>Run anyway</strong>.</p>
+        </article>
+        <article class="platform" data-os="macos">
+          <h3>macOS</h3>
+          <p class="req">macOS 10.15 or later, Apple silicon or Intel</p>
+          <a class="btn dl" data-asset="Agni-AI-Browser-macos-universal.dmg" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-macos-universal.dmg">Disk image (.dmg)</a>
+          <p class="note">Not code-signed yet. The first time, right-click Agni AI Browser, choose <strong>Open</strong>, then <strong>Open</strong> again.</p>
+        </article>
+        <article class="platform" data-os="linux">
+          <h3>Linux</h3>
+          <p class="req">64-bit; Ubuntu 22.04 or newer, Debian, Fedora and others</p>
+          <a class="btn dl" data-asset="Agni-AI-Browser-linux-amd64.deb" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-linux-amd64.deb">Ubuntu &amp; Debian (.deb)</a>
+          <a class="alt dl" data-asset="Agni-AI-Browser-linux-x86_64.rpm" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-linux-x86_64.rpm">Fedora (.rpm)</a>
+          <a class="alt dl" data-asset="Agni-AI-Browser-linux-x86_64.AppImage" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-linux-x86_64.AppImage">Other distributions (AppImage)</a>
+          <p class="note">The AppImage may need your system's <code>libfuse2</code> package.</p>
+        </article>
+      </div>
+
+      <p class="fine">On first launch, Agni offers a one-time download of its AI engine (about 1.5 GB). <a href="https://github.com/kellspell/agni-releases/releases">All versions and checksums</a></p>
     </div>
   </section>
 </main>
@@ -441,5 +480,55 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
     <span>Models are published by their creators on Hugging Face and ModelScope.</span>
   </div>
 </footer>
+<script>
+// Points the main download buttons at the visitor's system, and shows the
+// latest version and file sizes. Without the release (or JavaScript), the
+// per-platform links still work.
+(() => {
+  const DOWNLOAD = "https://github.com/kellspell/agni-releases/releases/latest/download/";
+  const PRIMARY = {
+    windows: { file: "Agni-AI-Browser-windows-x64-setup.exe", label: "Windows" },
+    macos: { file: "Agni-AI-Browser-macos-universal.dmg", label: "macOS" },
+    linux: { file: "Agni-AI-Browser-linux-amd64.deb", label: "Linux (.deb)" },
+  };
+  const ua = navigator.userAgent;
+  const os = /Windows/i.test(ua) ? "windows"
+    : /Macintosh|Mac OS X/i.test(ua) && !/iPhone|iPad/i.test(ua) ? "macos"
+    : /Linux|X11/i.test(ua) && !/Android/i.test(ua) ? "linux"
+    : null;
+  const mainButtons = ["hero-download", "main-download"].map((id) => document.getElementById(id));
+
+  if (os) {
+    for (const btn of mainButtons) {
+      btn.textContent = `Download for ${PRIMARY[os].label}`;
+      btn.href = DOWNLOAD + PRIMARY[os].file;
+    }
+    const card = document.querySelector(`.platform[data-os="${os}"]`);
+    card.classList.add("detected");
+    card.insertAdjacentHTML("afterbegin", '<span class="detected-label">Your system</span>');
+  }
+
+  fetch("https://api.github.com/repos/kellspell/agni-releases/releases/latest")
+    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then((release) => {
+      document.getElementById("release-version").textContent = `Latest version: ${release.tag_name}.`;
+      const sizes = new Map(release.assets.map((a) => [a.name, a.size]));
+      for (const link of document.querySelectorAll("a.dl")) {
+        const size = sizes.get(link.dataset.asset);
+        if (size) link.insertAdjacentHTML("beforeend", ` <span class="size">${(size / 1e6).toFixed(1)} MB</span>`);
+        else link.classList.add("unavailable");
+      }
+    })
+    .catch((status) => {
+      if (status !== 404) return; // offline or rate-limited: leave the links as they are
+      document.getElementById("release-version").textContent = "The first public build is on its way.";
+      for (const el of [...mainButtons, ...document.querySelectorAll("a.dl")]) {
+        el.classList.add("unavailable");
+        el.setAttribute("aria-disabled", "true");
+      }
+      for (const btn of mainButtons) btn.textContent = "Download: coming soon";
+    });
+})();
+</script>
 </body>
 </html>
