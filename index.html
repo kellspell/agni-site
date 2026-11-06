@@ -154,6 +154,31 @@ td.manual { color: var(--muted); }
 .checksum { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding: 18px 20px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); overflow-wrap: anywhere; display: grid; gap: 8px; }
 .checksum .ok-line { color: var(--green); }
 
+/* ---------- Connectors ---------- */
+.connector-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.connector { padding: 22px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
+.connector-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.connector p { color: var(--muted); font-size: 15px; }
+.badge { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.badge.free { color: var(--green); border-color: rgba(56, 211, 159, 0.4); }
+.badge.plus { color: var(--gold); border-color: rgba(255, 194, 75, 0.45); background: rgba(255, 194, 75, 0.08); }
+.callout { margin-top: 22px; padding: 18px 22px; border-radius: var(--radius); background: var(--panel); border: 1px dashed var(--line); color: var(--muted); font-size: 15.5px; }
+.callout strong { color: var(--text); }
+
+/* ---------- Pricing ---------- */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+.plan { padding: 28px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 16px; grid-template-rows: auto auto 1fr auto; }
+.plan.featured { border-color: rgba(242, 107, 33, 0.6); box-shadow: 0 0 0 1px rgba(242, 107, 33, 0.25), 0 20px 50px rgba(242, 107, 33, 0.14); }
+.plan-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; }
+.price { display: grid; gap: 2px; }
+.price strong { font: 800 44px var(--font-display); letter-spacing: -0.02em; line-height: 1; }
+.price span { color: var(--muted); font-size: 14px; }
+.plan ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; align-content: start; font-size: 15.5px; }
+.plan li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; }
+.plan li::before { content: "✓"; color: var(--green); font-weight: 700; }
+.plan .btn { justify-content: center; }
+.plan-note { font-size: 13px; color: var(--muted); text-align: center; }
+
 /* ---------- FAQ ---------- */
 .faq { display: grid; gap: 12px; max-width: 820px; }
 details { border-radius: 14px; background: var(--panel); border: 1px solid var(--line); padding: 4px 22px; }
@@ -185,11 +210,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 @media (max-width: 900px) {
   .hero .wrap, .sources { grid-template-columns: minmax(0, 1fr); }
-  .benefits, .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .benefits, .legend, .connector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plans { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
 }
 @media (max-width: 620px) {
   section { padding-block: 52px; }
-  .benefits, .legend, .steps { grid-template-columns: minmax(0, 1fr); }
+  .benefits, .legend, .steps, .connector-grid { grid-template-columns: minmax(0, 1fr); }
   .site-nav { display: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -226,7 +252,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
     <nav class="site-nav" aria-label="Page sections">
       <a href="#why">Why Agni</a>
       <a href="#how">How it works</a>
-      <a href="#fit">Hardware check</a>
+      <a href="#connectors">Connectors</a>
+      <a href="#pricing">Pricing</a>
       <a href="#faq">Questions</a>
     </nav>
   </div>
@@ -238,7 +265,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       <div>
         <p class="eyebrow">Local AI, without the setup</p>
         <h1>Your AI, <em>one click</em> away.</h1>
-        <p class="lede">Agni runs open AI models on your own computer. Browse a curated store, see at a glance which models your machine can handle, and start chatting. No terminal, no Python, no subscription.</p>
+        <p class="lede">Agni runs open AI models on your own computer. Browse a curated store, see at a glance which models your machine can handle, and start chatting. No terminal, no Python, no setup.</p>
         <div class="cta-row">
           <a class="btn btn-primary" id="hero-download" href="#download">Download for free</a>
           <a class="btn" href="#how">See how it works</a>
@@ -306,12 +333,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <article class="benefit">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2a3 3 0 0 0-2.8-1.7c-1.7 0-2.8.9-2.8 2.1 0 2.9 5.6 1.6 5.6 4.6 0 1.2-1.1 2.2-2.8 2.2a3.1 3.1 0 0 1-2.9-1.8M12 6v1.5M12 16.6V18"/></svg>
           <h3>Free on your computer</h3>
-          <p>Running models on your own machine is free, with no account and no monthly fee. You pay nothing for what your hardware can do.</p>
+          <p>Running models on your own machine is free, for good, with no account needed. You only pay if you want the extra connectors in Agni Plus.</p>
         </article>
         <article class="benefit">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12Z"/></svg>
           <h3>Your choice of chat app</h3>
-          <p>Chat inside Agni, or install a different chat window, such as Hollama or AnythingLLM, from the Chat Apps tab. They all use the models you installed.</p>
+          <p>Chat inside Agni, or install a different chat window, such as Hollama or AnythingLLM, from the Apps &amp; Extensions tab. They all use the models you installed.</p>
         </article>
       </div>
     </div>
@@ -383,6 +410,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
             <tr><td>Will it run on my computer?</td><td class="yes">Shown before you download</td><td class="manual">Find out after a multi-gigabyte download</td></tr>
             <tr><td>Can I use it for work?</td><td class="yes">License shown in plain words</td><td class="manual">Read each license yourself</td></tr>
             <tr><td>Is the download safe?</td><td class="yes">Checked against the publisher's fingerprint</td><td class="manual">Up to you</td></tr>
+            <tr><td>Letting AI use your files and the web</td><td class="yes">Add a connector in one click</td><td class="manual">Install runtimes, configure tool servers by hand</td></tr>
             <tr><td>Cleaning up</td><td class="yes">Remove in one click</td><td class="manual">Find and delete files by hand</td></tr>
           </tbody>
         </table>
@@ -406,6 +434,88 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
     </div>
   </section>
 
+  <section id="connectors">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Connectors</p>
+        <h2>Let your AI get things done.</h2>
+        <p class="lede">Connectors give your models tools. With one click, a model can work with your files, read your documents, look up a web page or remember what matters to you, all from a chat on your own computer.</p>
+      </div>
+      <div class="connector-grid">
+        <article class="connector">
+          <div class="connector-top"><h3>Files</h3><span class="badge free">Free</span></div>
+          <p>Reads, searches and organises files, only inside the folders you choose.</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>Web pages</h3><span class="badge free">Free</span></div>
+          <p>Opens a page you point it to, so your model can summarise articles, docs and news.</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>Date &amp; time</h3><span class="badge free">Free</span></div>
+          <p>Knows today's date and the time anywhere, and converts between time zones.</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>Documents</h3><span class="badge plus">Plus</span></div>
+          <p>Reads PDFs, Word, Excel and PowerPoint files, so you can ask questions about them.</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>Memory</h3><span class="badge plus">Plus</span></div>
+          <p>Remembers people, projects and preferences across chats. Stored only on your computer.</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>Git</h3><span class="badge plus">Plus</span></div>
+          <p>Looks through a code project's history and changes, and commits when you allow it.</p>
+        </article>
+      </div>
+      <p class="callout"><strong>You stay in charge.</strong> Anything that would change your files waits for your OK first, and every step the model takes is shown in the chat. Remove a connector in one click. More connectors are on the way.</p>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Pricing</p>
+        <h2>Free to run. Plus when you want more.</h2>
+        <p class="lede">Everything you need to run AI on your own computer is free. Agni Plus adds more connectors, so your models can do more of the work for you.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <div class="plan-head"><h3>Free</h3></div>
+          <div class="price"><strong>$0</strong><span>Free for good, no account needed</span></div>
+          <ul>
+            <li>Every model in the store, checked against your hardware</li>
+            <li>Chat and image creation on your computer</li>
+            <li>Apps &amp; Extensions</li>
+            <li>Files, Web pages and Date &amp; time connectors</li>
+          </ul>
+          <a class="btn" href="#download">Download for free</a>
+        </article>
+        <article class="plan featured">
+          <div class="plan-head"><h3>Agni Plus</h3><span class="badge plus">For you</span></div>
+          <div class="price"><strong>$8</strong><span>per month, or $80 a year (two months free)</span></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Every connector, including Documents, Memory and Git</li>
+            <li>New connectors and automations as they arrive</li>
+            <li>Cancel any time</li>
+          </ul>
+          <a class="btn btn-primary" href="#download">Get Agni, then upgrade in the app</a>
+        </article>
+        <article class="plan">
+          <div class="plan-head"><h3>Agni Business</h3><span class="badge">For teams</span></div>
+          <div class="price"><strong>$15</strong><span>per person per month, or $150 a year</span></div>
+          <ul>
+            <li>Everything in Agni Plus, for each person</li>
+            <li>One bill for your team</li>
+            <li>Add or remove people as your team changes</li>
+          </ul>
+          <a class="btn" href="#download">Get Agni, then upgrade in the app</a>
+        </article>
+      </div>
+      <p class="plan-note" style="margin-top: 18px">Prices in US dollars. Taxes may apply where you live. Payments are handled securely by Stripe.</p>
+    </div>
+  </section>
+
   <section id="faq">
     <div class="wrap">
       <div class="section-head">
@@ -415,7 +525,15 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       <div class="faq">
         <details>
           <summary>Is Agni free?</summary>
-          <p>Yes. Browsing the store, installing models and running them on your own computer is free, with no account needed. A paid option for running very large models in the cloud may come later; you'd only use it when a model is too big for your machine.</p>
+          <p>Yes. Browsing the store, installing models, chatting, creating images and the basic connectors are free, for good, with no account needed. Agni Plus is an optional subscription that adds more connectors.</p>
+        </details>
+        <details>
+          <summary>What do I get with Agni Plus?</summary>
+          <p>Every connector, including Documents, Memory and Git, plus each new connector and automation as it's added. Your models and chats work the same either way; Plus gives them more tools.</p>
+        </details>
+        <details>
+          <summary>How do I upgrade, or cancel?</summary>
+          <p>In Agni, click <strong>Sign in</strong> at the top and sign in with a code sent to your email. Choose a plan, and pay on Stripe's secure checkout page. To change your card or cancel, open <strong>Manage subscription</strong> in the same place. If you cancel, Plus stays on until the end of the period you paid for.</p>
         </details>
         <details>
           <summary>Do I need a powerful computer or a graphics card?</summary>
@@ -423,7 +541,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         </details>
         <details>
           <summary>Does anything I type get sent to the internet?</summary>
-          <p>No. Once a model is installed, your conversations happen entirely on your computer. Agni only goes online to download models and to update its store.</p>
+          <p>No. Once a model is installed, your conversations happen entirely on your computer. Agni only goes online to download models and connectors, to update its store, and, if you sign in, to check your plan. The Web pages connector is the exception you choose: when you ask about a page, it fetches that page.</p>
         </details>
         <details>
           <summary>Where do the models come from?</summary>
