@@ -1,0 +1,758 @@
+<!doctype html>
+<!-- Generated from src/page.html and src/locales/*.json by build.mjs. Edit those, then run: node build.mjs -->
+<html lang="hi" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agni AI App Studio</title>
+<meta name="description" content="Agni आपके अपने कंप्यूटर पर ओपन AI मॉडल चलाता है: एक क्लिक में इंस्टॉल, आपके हार्डवेयर से जाँचे हुए, और शुरू से निजी।">
+<link rel="canonical" href="https://agniappstudio.com/hi/">
+<link rel="alternate" hreflang="en" href="https://agniappstudio.com/">
+<link rel="alternate" hreflang="pt-BR" href="https://agniappstudio.com/pt-br/">
+<link rel="alternate" hreflang="es" href="https://agniappstudio.com/es/">
+<link rel="alternate" hreflang="fr" href="https://agniappstudio.com/fr/">
+<link rel="alternate" hreflang="de" href="https://agniappstudio.com/de/">
+<link rel="alternate" hreflang="ar" href="https://agniappstudio.com/ar/">
+<link rel="alternate" hreflang="hi" href="https://agniappstudio.com/hi/">
+<link rel="alternate" hreflang="x-default" href="https://agniappstudio.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap">
+<style>
+body { margin: 0; }
+/* Layout: a dark "console" page. Split hero (claim + a live-looking store card), then proof sections that each answer one question a newcomer asks. Single dark look, by choice: it matches the app. */
+:root {
+  color-scheme: dark;
+  --bg: #0B0D12;
+  --panel: #141822;
+  --panel-2: #1B2030;
+  --line: #262C3C;
+  --text: #ECEEF4;
+  --muted: #9BA3B6;
+  --ember: #B33A1A;
+  --flame: #F26B21;
+  --glow: #FF9A3C;
+  --gold: #FFC24B;
+  --on-accent: #1B0E06;
+  --green: #38D39F;
+  --amber: #F5B544;
+  --red: #E86A6A;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 16px;
+}
+:root {
+  --font-display: "Bricolage Grotesque", "Noto Sans Devanagari", "Segoe UI", sans-serif;
+  --font-body: "Figtree", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  background:
+    radial-gradient(900px 520px at 78% -8%, rgba(242, 107, 33, 0.16), transparent 62%),
+    radial-gradient(700px 420px at 0% 30%, rgba(179, 58, 26, 0.10), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--gold); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+}
+section { padding-block: 72px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; }
+h3 { font-size: 20px; font-weight: 700; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 62ch; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--glow); }
+.section-head { display: grid; gap: 14px; margin-bottom: 40px; }
+
+/* ---------- Header ---------- */
+.site-header { padding-block: 22px; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--text); text-decoration: none; }
+.brand svg { filter: drop-shadow(0 0 14px rgba(242, 107, 33, 0.45)); }
+.header-end { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.site-nav { display: flex; gap: 22px; flex-wrap: wrap; font-size: 15px; }
+.site-nav a { color: var(--muted); text-decoration: none; }
+.site-nav a:hover { color: var(--text); }
+
+/* Language menu: plain links, so it works without JavaScript. */
+.lang { position: relative; padding: 0; border: 0; background: none; }
+.lang summary {
+  padding: 6px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel);
+  font: 600 14px var(--font-body); color: var(--text); white-space: nowrap; display: block;
+}
+.lang summary::after { content: none; }
+.lang[open] summary, .lang summary:hover { border-color: var(--flame); }
+.lang ul {
+  position: absolute; inset-inline-end: 0; top: calc(100% + 8px); z-index: 10;
+  list-style: none; margin: 0; padding: 6px; min-width: 200px;
+  border-radius: 12px; background: var(--panel); border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+.lang a { display: block; padding: 8px 12px; border-radius: 8px; color: var(--text); text-decoration: none; font-size: 15px; }
+.lang a:hover { background: var(--panel-2); }
+.lang a[aria-current="true"] { color: var(--gold); }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: 40px 80px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 56px; align-items: center; }
+.hero h1 { font-size: clamp(44px, 7vw, 84px); font-weight: 800; letter-spacing: -0.035em; }
+.hero h1 em { font-style: normal; background: linear-gradient(100deg, var(--flame), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lede { font-size: 19px; margin-top: 22px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 48px; padding: 12px 22px; border-radius: 12px;
+  font: 600 16px var(--font-body); text-decoration: none; cursor: pointer;
+  border: 1px solid var(--line); background: var(--panel); color: var(--text);
+}
+.btn-primary { border: 0; background: linear-gradient(135deg, var(--flame), var(--gold)); color: var(--on-accent); box-shadow: 0 10px 30px rgba(242, 107, 33, 0.35); }
+.btn[aria-disabled="true"] { cursor: default; }
+.soon { font-family: var(--font-mono); font-size: 11px; padding: 2px 7px; border-radius: 999px; background: rgba(27, 14, 6, 0.18); }
+.btn:not(.btn-primary) .soon { background: var(--panel-2); color: var(--muted); }
+.hero-note { margin-top: 14px; font-size: 14px; color: var(--muted); }
+
+/* The store card mock: the hardware check is the product's core idea, so the hero shows it. */
+.mock {
+  position: relative;
+  padding: 22px; border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 40%), var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+.mock-machine { font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 14px; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.mock-machine strong { color: var(--text); font-weight: 500; }
+.model { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 14px; align-items: center; padding: 12px 0; }
+.model + .model { border-top: 1px solid var(--line); }
+.model-name { font-weight: 600; }
+.model-meta { grid-column: 2; font-size: 13px; color: var(--muted); }
+.dot { width: 10px; height: 10px; border-radius: 50%; grid-row: span 2; }
+.dot.great { background: var(--green); box-shadow: 0 0 10px var(--green); }
+.dot.ok { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+.dot.no { background: var(--red); }
+.fit { grid-row: span 2; font-size: 13px; font-weight: 600; text-align: end; }
+.fit.great { color: var(--green); }
+.fit.ok { color: var(--amber); }
+.fit.no { color: var(--red); }
+
+/* ---------- Benefits ---------- */
+.benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.benefit { padding: 26px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 10px; align-content: start; }
+.benefit svg { color: var(--glow); }
+.benefit p { color: var(--muted); font-size: 15.5px; }
+
+/* ---------- Steps (a real sequence, so numbered) ---------- */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.steps li { display: grid; gap: 10px; align-content: start; }
+.steps li::before {
+  counter-increment: step; content: counter(step);
+  width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+  font: 700 18px var(--font-display); color: var(--on-accent);
+  background: linear-gradient(135deg, var(--flame), var(--gold));
+}
+.steps p { color: var(--muted); font-size: 15.5px; }
+
+/* ---------- Fit legend ---------- */
+.legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.legend-item { padding: 22px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 8px; }
+.legend-item .label { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.legend-item .label .dot { grid-row: auto; }
+.legend-item p { color: var(--muted); font-size: 15px; }
+.spec { font-family: var(--font-mono); font-size: 13px; color: var(--text); }
+
+/* ---------- Comparison ---------- */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+table { width: 100%; border-collapse: collapse; min-width: 560px; background: var(--panel); }
+th, td { padding: 16px 20px; text-align: start; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 14px var(--font-body); color: var(--muted); }
+th.agni { color: var(--gold); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; width: 34%; }
+td.yes { color: var(--text); }
+td.manual { color: var(--muted); }
+
+/* ---------- Sources strip ---------- */
+.sources { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.checksum { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding: 18px 20px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); overflow-wrap: anywhere; display: grid; gap: 8px; }
+.checksum .ok-line { color: var(--green); }
+
+/* ---------- Connectors ---------- */
+.connector-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.connector { padding: 22px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
+.connector-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.connector p { color: var(--muted); font-size: 15px; }
+.badge { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.badge.free { color: var(--green); border-color: rgba(56, 211, 159, 0.4); }
+.badge.plus { color: var(--gold); border-color: rgba(255, 194, 75, 0.45); background: rgba(255, 194, 75, 0.08); }
+.callout { margin-top: 22px; padding: 18px 22px; border-radius: var(--radius); background: var(--panel); border: 1px dashed var(--line); color: var(--muted); font-size: 15.5px; }
+.callout strong { color: var(--text); }
+
+/* ---------- Pricing ---------- */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+.plan { padding: 28px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); display: grid; gap: 16px; grid-template-rows: auto auto 1fr auto; }
+.plan.featured { border-color: rgba(242, 107, 33, 0.6); box-shadow: 0 0 0 1px rgba(242, 107, 33, 0.25), 0 20px 50px rgba(242, 107, 33, 0.14); }
+.plan-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; }
+.price { display: grid; gap: 2px; }
+.price strong { font: 800 44px var(--font-display); letter-spacing: -0.02em; line-height: 1; }
+.price span { color: var(--muted); font-size: 14px; }
+.plan ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; align-content: start; font-size: 15.5px; }
+.plan li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; }
+.plan li::before { content: "✓"; color: var(--green); font-weight: 700; }
+.plan .btn { justify-content: center; }
+.plan-note { font-size: 13px; color: var(--muted); text-align: center; }
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; gap: 12px; max-width: 820px; }
+.faq details { border-radius: 14px; background: var(--panel); border: 1px solid var(--line); padding: 4px 22px; }
+.faq summary { cursor: pointer; padding-block: 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary { list-style: none; cursor: pointer; }
+.faq summary::after { content: "+"; color: var(--glow); font-weight: 700; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { color: var(--muted); padding-bottom: 18px; font-size: 15.5px; }
+
+/* ---------- Final CTA + footer ---------- */
+.final { text-align: center; }
+.final .wrap { display: grid; justify-items: center; gap: 18px; }
+.final .cta-row { justify-content: center; margin-top: 8px; }
+.platforms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; width: 100%; margin-top: 28px; text-align: start; }
+.platform { display: grid; gap: 10px; align-content: start; padding: 24px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); }
+.platform.detected { border-color: rgba(242, 107, 33, 0.6); box-shadow: 0 0 0 1px rgba(242, 107, 33, 0.25), 0 16px 40px rgba(242, 107, 33, 0.12); }
+.platform .req { color: var(--muted); font-size: 14px; }
+.platform .btn { justify-content: center; }
+.platform .detected-label { font-family: var(--font-mono); font-size: 11px; color: var(--glow); text-transform: uppercase; letter-spacing: 0.08em; }
+.platform .alt { font-size: 14px; }
+.platform .note { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.platform code { font-family: var(--font-mono); font-size: 12px; }
+.size { color: var(--muted); font-weight: 400; font-size: 13px; }
+.fine { font-size: 14px; color: var(--muted); }
+.unavailable { pointer-events: none; opacity: 0.55; }
+@media (max-width: 900px) { .platforms { grid-template-columns: minmax(0, 1fr); } }
+footer { padding-block: 32px 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .hero .wrap, .sources { grid-template-columns: minmax(0, 1fr); }
+  .benefits, .legend, .connector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plans { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
+}
+@media (max-width: 620px) {
+  section { padding-block: 52px; }
+  .benefits, .legend, .steps, .connector-grid { grid-template-columns: minmax(0, 1fr); }
+  .site-nav { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mock { animation: rise 0.7s ease-out both; }
+  @keyframes rise { from { transform: translateY(12px); } to { transform: none; } }
+}
+
+/* Arabic and Devanagari letters join or stack, so they get no letter spacing and no forced capitals. */
+:lang(ar) h1, :lang(ar) h2, :lang(ar) .eyebrow, :lang(ar) .badge, :lang(ar) .price strong,
+:lang(hi) h1, :lang(hi) h2, :lang(hi) .eyebrow, :lang(hi) .badge, :lang(hi) .price strong { letter-spacing: 0; text-transform: none; }
+:lang(ar) h1, :lang(hi) h1 { line-height: 1.3; }
+/* The code font has no Arabic or Devanagari letters, so small labels use the body font there. */
+:lang(ar) .eyebrow, :lang(ar) .mock-machine, :lang(ar) .badge, :lang(ar) .spec, :lang(ar) .platform .detected-label,
+:lang(hi) .eyebrow, :lang(hi) .mock-machine, :lang(hi) .badge, :lang(hi) .spec, :lang(hi) .platform .detected-label { font-family: var(--font-body); }
+:lang(ar) h2, :lang(ar) h3, :lang(hi) h2, :lang(hi) h3 { line-height: 1.35; }
+/* File names, checksums and versions read left to right in every language. */
+.checksum, .platform code, .size { direction: ltr; unicode-bidi: isolate; }
+.checksum { text-align: start; }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Agni AI App Studio: आपका AI, बस एक क्लिक दूर">
+<meta property="og:description" content="Agni आपके अपने कंप्यूटर पर ओपन AI मॉडल चलाता है: एक क्लिक में इंस्टॉल, आपके हार्डवेयर से जाँचे हुए, और शुरू से निजी।">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agniappstudio.com/hi/">
+<meta property="og:locale" content="hi_IN">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Agni AI App Studio होम">
+      <svg width="40" height="40" viewBox="0 0 512 512" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171A23"/><stop offset="1" stop-color="#0B0D12"/></linearGradient>
+          <radialGradient id="lg-glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FF9A3C" stop-opacity="0.38"/><stop offset="1" stop-color="#FF9A3C" stop-opacity="0"/></radialGradient>
+          <linearGradient id="lg-outer" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#B33A1A"/><stop offset="0.55" stop-color="#F26B21"/><stop offset="1" stop-color="#FF9A3C"/></linearGradient>
+          <linearGradient id="lg-core" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF9A3C"/><stop offset="1" stop-color="#FFC24B"/></linearGradient>
+          <linearGradient id="lg-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.06"/></linearGradient>
+        </defs>
+        <rect width="512" height="512" rx="112" fill="url(#lg-bg)"/>
+        <circle cx="256" cy="300" r="190" fill="url(#lg-glow)"/>
+        <path d="M262 64 C280 140 384 186 384 318 A128 128 0 0 1 128 318 C128 250 162 214 190 190 C192 226 206 250 228 262 C214 196 230 120 262 64 Z" fill="url(#lg-outer)"/>
+        <path d="M252 236 C266 282 316 306 316 360 A60 60 0 0 1 196 360 C196 318 228 292 252 236 Z" fill="url(#lg-core)"/>
+        <rect x="5" y="5" width="502" height="502" rx="107" fill="none" stroke="url(#lg-rim)" stroke-width="10"/>
+      </svg>
+      Agni AI App Studio
+    </a>
+    <div class="header-end">
+      <nav class="site-nav" aria-label="पेज के सेक्शन">
+        <a href="#why">Agni क्यों</a>
+        <a href="#how">यह कैसे काम करता है</a>
+        <a href="#connectors">कनेक्टर</a>
+        <a href="#pricing">कीमतें</a>
+        <a href="#faq">सवाल</a>
+      </nav>
+      <details class="lang">
+        <summary aria-label="भाषा" title="भाषा">🌐 हि</summary>
+        <ul>
+          <li><a href="/" hreflang="en" lang="en">English</a></li>
+          <li><a href="/pt-br/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a></li>
+          <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+          <li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+          <li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+          <li><a href="/ar/" hreflang="ar" lang="ar">العربية</a></li>
+          <li><a href="/hi/" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">लोकल AI, बिना सेटअप</p>
+        <h1>आपका AI, बस <em>एक क्लिक</em> दूर।</h1>
+        <p class="lede">Agni आपके अपने कंप्यूटर पर ओपन AI मॉडल चलाता है। चुनिंदा स्टोर देखें, एक नज़र में जानें कि आपकी मशीन कौन-से मॉडल चला सकती है, और चैट शुरू करें। न टर्मिनल, न Python, न सेटअप।</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="hero-download" href="#download">मुफ़्त डाउनलोड करें</a>
+          <a class="btn" href="#how">देखें यह कैसे काम करता है</a>
+        </div>
+        <p class="hero-note">Windows, macOS और Linux के लिए। अपने कंप्यूटर पर मॉडल चलाना मुफ़्त है।</p>
+      </div>
+
+      <div class="mock" role="img" aria-label="Agni का स्टोर तीन मॉडल दिखाता है: Qwen 2.5 Mini बढ़िया चलता है, Mistral 7B धीमा चलता है, और 70 अरब पैरामीटर वाला मॉडल इस कंप्यूटर पर नहीं चलेगा।">
+        <div class="mock-machine">
+          <strong>आपका कंप्यूटर</strong>
+          <span>16 GB मेमोरी</span>
+          <span>ग्राफ़िक्स कार्ड नहीं</span>
+          <span>84 GB खाली</span>
+        </div>
+        <div class="model">
+          <span class="dot great"></span>
+          <span class="model-name">Qwen 2.5 Mini</span>
+          <span class="fit great">बढ़िया चलता है</span>
+          <span class="model-meta">रोज़मर्रा के सवाल और लेखन · 1.1 GB</span>
+        </div>
+        <div class="model">
+          <span class="dot ok"></span>
+          <span class="model-name">Mistral 7B</span>
+          <span class="fit ok">चलता है, धीमा</span>
+          <span class="model-meta">लंबी बातचीत · 4.4 GB</span>
+        </div>
+        <div class="model">
+          <span class="dot no"></span>
+          <span class="model-name">Llama 3.3 70B</span>
+          <span class="fit no">बहुत बड़ा</span>
+          <span class="model-meta">लगभग 48 GB मेमोरी चाहिए · 42 GB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Agni क्यों</p>
+        <h2>लोकल AI का हर मुश्किल काम, आपके लिए संभाला गया।</h2>
+        <p class="lede">अपनी मशीन पर AI चलाने का मतलब आमतौर पर कमांड लाइन, ड्राइवर और अंदाज़े होता है। Agni इसे ऐप स्टोर जैसा आसान बना देता है।</p>
+      </div>
+      <div class="benefits">
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <h3>शुरू से निजी</h3>
+          <p>मॉडल आपके कंप्यूटर पर चलते हैं। आपके सवाल, दस्तावेज़ और जवाब कभी उससे बाहर नहीं जाते, इसलिए यह निजी और गोपनीय सामग्री के लिए भी ठीक है।</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="m8.5 10 2.2 2.2L15.5 7.5"/></svg>
+          <h3>आपके हार्डवेयर से जाँचा गया</h3>
+          <p>Agni आपका कंप्यूटर जाँचता है और डाउनलोड से पहले हर मॉडल को हरा, पीला या लाल दिखाता है, ताकि आपको कभी ऐसे गीगाबाइट्स का इंतज़ार न करना पड़े जो चलेंगे ही नहीं।</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7l1-7Z"/></svg>
+          <h3>एक क्लिक में इंस्टॉल</h3>
+          <p>मॉडल चुनें, इंस्टॉल दबाएँ, प्रोग्रेस बार देखें। Agni उसे डाउनलोड करता है, जाँचता है और सेट अप करता है। न टर्मिनल, न Python, न ड्राइवर।</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 14l2 2 4-4"/></svg>
+          <h3>लाइसेंस जाँचा गया</h3>
+          <p>स्टोर का हर मॉडल अपना लाइसेंस आसान शब्दों में दिखाता है, ताकि भरोसा करने से पहले आप जान सकें कि उसे काम में इस्तेमाल कर सकते हैं या नहीं।</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2a3 3 0 0 0-2.8-1.7c-1.7 0-2.8.9-2.8 2.1 0 2.9 5.6 1.6 5.6 4.6 0 1.2-1.1 2.2-2.8 2.2a3.1 3.1 0 0 1-2.9-1.8M12 6v1.5M12 16.6V18"/></svg>
+          <h3>आपके कंप्यूटर पर मुफ़्त</h3>
+          <p>अपनी मशीन पर मॉडल चलाना हमेशा के लिए मुफ़्त है, बिना किसी अकाउंट के। आप तभी भुगतान करते हैं जब आपको Agni Plus के अतिरिक्त कनेक्टर चाहिए।</p>
+        </article>
+        <article class="benefit">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12Z"/></svg>
+          <h3>अपनी पसंद का चैट ऐप</h3>
+          <p>Agni के अंदर चैट करें, या ऐप्स और एक्सटेंशन टैब से Hollama या AnythingLLM जैसी दूसरी चैट विंडो इंस्टॉल करें। सभी आपके इंस्टॉल किए मॉडलों का ही इस्तेमाल करते हैं।</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">यह कैसे काम करता है</p>
+        <h2>डाउनलोड से पहले जवाब तक, कुछ ही मिनटों में।</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Agni खोलें</h3>
+          <p>Agni आपके कंप्यूटर की मेमोरी, ग्राफ़िक्स कार्ड और खाली जगह जाँचता है, और मॉडल चलाने वाला इंजन सेट अप करता है।</p>
+        </li>
+        <li>
+          <h3>हरा मॉडल चुनें</h3>
+          <p>जो करना चाहते हैं उसके हिसाब से देखें: चैट, लेखन, कोडिंग। हरे का मतलब है कि यह आपकी मशीन पर बढ़िया चलता है। इंस्टॉल दबाएँ।</p>
+        </li>
+        <li>
+          <h3>चैट शुरू करें</h3>
+          <p>तुरंत कुछ भी पूछें, बिना कुछ भी इंटरनेट पर भेजे। काम पूरा होने पर एक क्लिक में मॉडल हटा दें।</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="fit">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">हार्डवेयर जाँच</p>
+        <h2>डाउनलोड से पहले जानें।</h2>
+        <p class="lede">AI मॉडल 1 GB से लेकर 100 GB से भी ज़्यादा के होते हैं, और गलत मॉडल एक सामान्य लैपटॉप को अटका सकता है। Agni हर मॉडल की ज़रूरत की तुलना आपके कंप्यूटर से करता है, और आसान शब्दों में बताता है।</p>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <span class="label"><span class="dot great"></span> बढ़िया चलता है</span>
+          <p>आपकी मेमोरी या ग्राफ़िक्स कार्ड में आराम से समा जाता है। जवाब जल्दी आते हैं।</p>
+          <span class="spec">जैसे 16 GB पर 3B मॉडल</span>
+        </div>
+        <div class="legend-item">
+          <span class="label"><span class="dot ok"></span> चलता है, पर धीमा</span>
+          <p>काम करता है, बस जवाब थोड़ा देर से आते हैं। कभी-कभार इस्तेमाल के लिए ठीक।</p>
+          <span class="spec">जैसे बिना ग्राफ़िक्स कार्ड के 7B मॉडल</span>
+        </div>
+        <div class="legend-item">
+          <span class="label"><span class="dot no"></span> ठीक से नहीं चलेगा</span>
+          <p>आपके पास जितनी मेमोरी या डिस्क स्पेस है, उससे ज़्यादा चाहिए। Agni आपको गलती से इसे डाउनलोड नहीं करने देगा।</p>
+          <span class="spec">जैसे 16 GB पर 70B मॉडल</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Agni या खुद करें</p>
+        <h2>वही मॉडल, बिना किसी झंझट के।</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">क्या करना पड़ता है</th><th scope="col" class="agni">Agni के साथ</th><th scope="col">खुद सेट अप करने पर</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>मॉडल इंस्टॉल करना</td><td class="yes">एक क्लिक, प्रोग्रेस बार के साथ</td><td class="manual">कमांड लाइन, मॉडल फ़ाइलें, कॉन्फ़िगरेशन</td></tr>
+            <tr><td>क्या यह मेरे कंप्यूटर पर चलेगा?</td><td class="yes">डाउनलोड से पहले दिखाया जाता है</td><td class="manual">कई गीगाबाइट डाउनलोड के बाद पता चलता है</td></tr>
+            <tr><td>क्या मैं इसे काम में इस्तेमाल कर सकता हूँ?</td><td class="yes">लाइसेंस आसान शब्दों में</td><td class="manual">हर लाइसेंस खुद पढ़ें</td></tr>
+            <tr><td>क्या डाउनलोड सुरक्षित है?</td><td class="yes">प्रकाशक के फ़िंगरप्रिंट से जाँचा गया</td><td class="manual">आपकी ज़िम्मेदारी</td></tr>
+            <tr><td>AI को आपकी फ़ाइलें और वेब इस्तेमाल करने देना</td><td class="yes">एक क्लिक में कनेक्टर जोड़ें</td><td class="manual">रनटाइम इंस्टॉल करें, टूल सर्वर खुद कॉन्फ़िगर करें</td></tr>
+            <tr><td>साफ़-सफ़ाई</td><td class="yes">एक क्लिक में हटाएँ</td><td class="manual">फ़ाइलें खुद ढूँढकर हटाएँ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap sources">
+      <div class="section-head" style="margin-bottom: 0">
+        <p class="eyebrow">सीधे स्रोत से</p>
+        <h2>उन्हीं से डाउनलोड, जो मॉडल प्रकाशित करते हैं।</h2>
+        <p class="lede">Agni कोई कॉपी होस्ट नहीं करता। हर मॉडल सीधे Hugging Face या ModelScope से डाउनलोड होता है, वे लाइब्रेरी जहाँ AI लैब्स अपना काम प्रकाशित करती हैं। कुछ भी इंस्टॉल करने से पहले, Agni जाँचता है कि फ़ाइल प्रकाशक के डिजिटल फ़िंगरप्रिंट से बिल्कुल मेल खाती है।</p>
+      </div>
+      <div class="checksum" aria-label="डाउनलोड जाँच का उदाहरण">
+        <span>qwen2.5-1.5b-instruct-q4_k_m.gguf · 1.12 GB</span>
+        <span>huggingface.co/Qwen</span>
+        <span>SHA-256 6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e</span>
+        <span class="ok-line">✓ प्रकाशक के फ़िंगरप्रिंट से मेल खाती है</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="images">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">इमेज बनाना</p>
+        <h2>बताइए, और बनते हुए देखिए।</h2>
+        <p class="lede">Agni एक छोटे से विवरण से तस्वीरें भी बना सकता है, पूरी तरह आपके कंप्यूटर पर। इमेज मॉडल को चैट मॉडल की तरह ही इंस्टॉल करें, लिखें कि आप क्या देखना चाहते हैं, और नतीजा सहेज लें। आप जो भी बताते हैं, वह कहीं नहीं भेजा जाता।</p>
+      </div>
+      <div class="connector-grid">
+        <article class="connector">
+          <div class="connector-top"><h3>Z-Image Turbo</h3><span class="badge free">मुफ़्त</span></div>
+          <p>कुछ ही चरणों में विस्तृत, असली जैसी तस्वीरें, Alibaba की Tongyi Lab से। Apache 2.0 लाइसेंस, काम के लिए ठीक।</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>Stable Diffusion 1.5</h3><span class="badge free">मुफ़्त</span></div>
+          <p>क्लासिक ओपन इमेज मॉडल। छोटा और तेज़, इसलिए पुराने कंप्यूटरों के लिए उपयुक्त। इसका लाइसेंस कुछ ऐसे उपयोग बताता है जिनकी अनुमति नहीं है।</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>शुरू से निजी</h3><span class="badge free">मुफ़्त</span></div>
+          <p>आपके विवरण और तस्वीरें आपके कंप्यूटर पर ही रहती हैं। न अकाउंट, न क्रेडिट, और जितनी चाहें उतनी तस्वीरें।</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="connectors">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">कनेक्टर</p>
+        <h2>अपने AI से काम करवाएँ।</h2>
+        <p class="lede">कनेक्टर आपके मॉडलों को टूल देते हैं। एक क्लिक में, मॉडल आपकी फ़ाइलों के साथ काम कर सकता है, आपके दस्तावेज़ पढ़ सकता है, कोई वेब पेज देख सकता है या आपके लिए ज़रूरी बातें याद रख सकता है, सब कुछ आपके अपने कंप्यूटर की चैट से।</p>
+      </div>
+      <div class="connector-grid">
+        <article class="connector">
+          <div class="connector-top"><h3>फ़ाइलें</h3><span class="badge free">मुफ़्त</span></div>
+          <p>फ़ाइलें पढ़ता, खोजता और व्यवस्थित करता है, सिर्फ़ उन फ़ोल्डरों के अंदर जो आप चुनें।</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>वेब पेज</h3><span class="badge free">मुफ़्त</span></div>
+          <p>आपका बताया पेज खोलता है, ताकि आपका मॉडल लेख, डॉक्यूमेंटेशन और खबरों का सार दे सके।</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>तारीख और समय</h3><span class="badge free">मुफ़्त</span></div>
+          <p>आज की तारीख और दुनिया में कहीं का भी समय जानता है, और टाइम ज़ोन बदल देता है।</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>दस्तावेज़</h3><span class="badge plus">Plus</span></div>
+          <p>PDF, Word, Excel और PowerPoint फ़ाइलें पढ़ता है, ताकि आप उनके बारे में सवाल पूछ सकें।</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>मेमोरी</h3><span class="badge plus">Plus</span></div>
+          <p>सभी चैट में लोगों, प्रोजेक्ट और पसंद को याद रखता है। सिर्फ़ आपके कंप्यूटर पर सहेजा जाता है।</p>
+        </article>
+        <article class="connector">
+          <div class="connector-top"><h3>Git</h3><span class="badge plus">Plus</span></div>
+          <p>किसी कोड प्रोजेक्ट का इतिहास और बदलाव देखता है, और आपकी अनुमति पर कमिट करता है।</p>
+        </article>
+      </div>
+      <p class="callout"><strong>नियंत्रण आपके हाथ में।</strong> जो कुछ भी आपकी फ़ाइलें बदलेगा, वह पहले आपकी मंज़ूरी का इंतज़ार करता है, और मॉडल का हर कदम चैट में दिखता है। एक क्लिक में कनेक्टर हटाएँ। और कनेक्टर आ रहे हैं।</p>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">कीमतें</p>
+        <h2>चलाना मुफ़्त है। और चाहिए तो Plus।</h2>
+        <p class="lede">अपने कंप्यूटर पर AI चलाने के लिए जो कुछ चाहिए, सब मुफ़्त है। Agni Plus और कनेक्टर जोड़ता है, ताकि आपके मॉडल आपके लिए और ज़्यादा काम कर सकें।</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <div class="plan-head"><h3>मुफ़्त</h3></div>
+          <div class="price"><strong>$0</strong><span>हमेशा के लिए मुफ़्त, अकाउंट की ज़रूरत नहीं</span></div>
+          <ul>
+            <li>स्टोर का हर मॉडल, आपके हार्डवेयर के हिसाब से जाँचा हुआ</li>
+            <li>आपके कंप्यूटर पर चैट और इमेज बनाना</li>
+            <li>ऐप्स और एक्सटेंशन</li>
+            <li>फ़ाइलें, वेब पेज और तारीख व समय कनेक्टर</li>
+          </ul>
+          <a class="btn" href="#download">मुफ़्त डाउनलोड करें</a>
+        </article>
+        <article class="plan featured">
+          <div class="plan-head"><h3>Agni Plus</h3><span class="badge plus">आपके लिए</span></div>
+          <div class="price"><strong>$8</strong><span>प्रति माह, या $80 प्रति वर्ष (दो महीने मुफ़्त)</span></div>
+          <ul>
+            <li>मुफ़्त प्लान की हर चीज़</li>
+            <li>हर कनेक्टर, जिसमें दस्तावेज़, मेमोरी और Git शामिल हैं</li>
+            <li>नए कनेक्टर और ऑटोमेशन, जैसे ही वे आएँ</li>
+            <li>कभी भी रद्द करें</li>
+          </ul>
+          <a class="btn btn-primary" href="#download">Agni डाउनलोड करें, फिर ऐप में अपग्रेड करें</a>
+        </article>
+        <article class="plan">
+          <div class="plan-head"><h3>Agni Business</h3><span class="badge">टीमों के लिए</span></div>
+          <div class="price"><strong>$15</strong><span>प्रति व्यक्ति प्रति माह, या $150 प्रति वर्ष</span></div>
+          <ul>
+            <li>Agni Plus की हर चीज़, हर व्यक्ति के लिए</li>
+            <li>आपकी टीम के लिए एक ही बिल</li>
+            <li>टीम बदलने पर लोगों को जोड़ें या हटाएँ</li>
+          </ul>
+          <a class="btn" href="#download">Agni डाउनलोड करें, फिर ऐप में अपग्रेड करें</a>
+        </article>
+      </div>
+      <p class="plan-note" style="margin-top: 18px">कीमतें अमेरिकी डॉलर में हैं। आपके स्थान के अनुसार टैक्स लग सकता है। भुगतान Stripe सुरक्षित रूप से संभालता है।</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">सवाल</p>
+        <h2>जानने लायक बातें।</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>क्या Agni मुफ़्त है?</summary>
+          <p>हाँ। स्टोर देखना, मॉडल इंस्टॉल करना, चैट करना, इमेज बनाना और बुनियादी कनेक्टर हमेशा के लिए मुफ़्त हैं, बिना किसी अकाउंट के। Agni Plus एक वैकल्पिक सब्सक्रिप्शन है जो और कनेक्टर जोड़ता है।</p>
+        </details>
+        <details>
+          <summary>Agni Plus में मुझे क्या मिलता है?</summary>
+          <p>हर कनेक्टर, जिसमें दस्तावेज़, मेमोरी और Git शामिल हैं, साथ ही हर नया कनेक्टर और ऑटोमेशन जैसे ही जोड़ा जाए। आपके मॉडल और चैट दोनों तरह से एक जैसे काम करते हैं; Plus उन्हें और टूल देता है।</p>
+        </details>
+        <details>
+          <summary>मैं अपग्रेड या रद्द कैसे करूँ?</summary>
+          <p>Agni में, ऊपर <strong>साइन इन करें</strong> पर क्लिक करें और अपने ईमेल पर भेजे गए कोड से साइन इन करें। एक प्लान चुनें, और Stripe के सुरक्षित चेकआउट पेज पर भुगतान करें। अपना कार्ड बदलने या रद्द करने के लिए, उसी जगह <strong>सब्सक्रिप्शन मैनेज करें</strong> खोलें। रद्द करने पर, Plus उस अवधि के अंत तक चालू रहता है जिसका आपने भुगतान किया है।</p>
+        </details>
+        <details>
+          <summary>क्या मुझे शक्तिशाली कंप्यूटर या ग्राफ़िक्स कार्ड चाहिए?</summary>
+          <p>नहीं। छोटे मॉडल 8 GB मेमोरी वाले सामान्य लैपटॉप पर अच्छे चलते हैं। ग्राफ़िक्स कार्ड या Apple silicon वाला Mac बड़े मॉडलों को तेज़ बनाता है, और Agni की हार्डवेयर जाँच ठीक-ठीक दिखाती है कि आपकी मशीन क्या चला सकती है।</p>
+        </details>
+        <details>
+          <summary>क्या मेरा टाइप किया हुआ कुछ भी इंटरनेट पर जाता है?</summary>
+          <p>नहीं। मॉडल इंस्टॉल होने के बाद, आपकी बातचीत पूरी तरह आपके कंप्यूटर पर होती है। Agni सिर्फ़ मॉडल और कनेक्टर डाउनलोड करने, अपना स्टोर अपडेट करने, और साइन इन करने पर आपका प्लान जाँचने के लिए ऑनलाइन जाता है। वेब पेज कनेक्टर वह अपवाद है जिसे आप चुनते हैं: जब आप किसी पेज के बारे में पूछते हैं, तो वह उस पेज को लाता है।</p>
+        </details>
+        <details>
+          <summary>मॉडल कहाँ से आते हैं?</summary>
+          <p>Hugging Face और ModelScope से, जहाँ Alibaba, Meta, Microsoft और Mistral जैसी AI लैब्स उन्हें प्रकाशित करती हैं। Agni उन्हें सीधे वहीं से डाउनलोड करता है और हर फ़ाइल जाँचता है।</p>
+        </details>
+        <details>
+          <summary>क्या मैं इन मॉडलों का इस्तेमाल अपने बिज़नेस में कर सकता हूँ?</summary>
+          <p>इनमें से कई का, हाँ। स्टोर का हर मॉडल अपना लाइसेंस दिखाता है और बताता है कि व्यावसायिक उपयोग की अनुमति है, शर्तों के साथ अनुमति है, या अनुमति नहीं है, ताकि आप भरोसे के साथ चुन सकें।</p>
+        </details>
+        <details>
+          <summary>Agni कौन-सी भाषाएँ बोलता है?</summary>
+          <p>ऐप अंग्रेज़ी, पुर्तगाली, स्पेनिश, फ़्रेंच, जर्मन, अरबी और हिंदी में है, और अपने-आप आपके कंप्यूटर की भाषा चुन लेता है। AI मॉडल खुद उसी भाषा में जवाब देते हैं जिसमें आप लिखते हैं।</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" id="download">
+    <div class="wrap">
+      <h2>AI को घर लाएँ।</h2>
+      <p class="lede">Windows, macOS और Linux के लिए मुफ़्त। <span id="release-version">Agni एक शुरुआती टेस्ट वर्ज़न है।</span></p>
+      <div class="cta-row">
+        <a class="btn btn-primary" id="main-download" href="#platforms">मुफ़्त डाउनलोड करें</a>
+      </div>
+
+      <div class="platforms" id="platforms">
+        <article class="platform" data-os="windows">
+          <h3>Windows</h3>
+          <p class="req">Windows 10 या 11, 64-बिट</p>
+          <a class="btn dl" data-asset="Agni-AI-Browser-windows-x64-setup.exe" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-windows-x64-setup.exe">इंस्टॉलर (.exe)</a>
+          <a class="alt dl" data-asset="Agni-AI-Browser-windows-x64.msi" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-windows-x64.msi">.msi पैकेज, IT द्वारा मैनेज किए गए कंप्यूटरों के लिए</a>
+          <p class="note">अभी कोड-साइन नहीं है। अगर Windows कहे &quot;Windows ने आपके PC को सुरक्षित किया&quot;, तो <strong>अधिक जानकारी</strong> पर क्लिक करें, फिर <strong>फिर भी चलाएँ</strong> पर।</p>
+        </article>
+        <article class="platform" data-os="macos">
+          <h3>macOS</h3>
+          <p class="req">macOS 10.15 या नया, Apple silicon या Intel</p>
+          <a class="btn dl" data-asset="Agni-AI-Browser-macos-universal.dmg" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-macos-universal.dmg">डिस्क इमेज (.dmg)</a>
+          <p class="note">अभी कोड-साइन नहीं है। पहली बार, Agni AI App Studio पर राइट-क्लिक करें, <strong>Open</strong> चुनें, फिर दोबारा <strong>Open</strong> चुनें।</p>
+        </article>
+        <article class="platform" data-os="linux">
+          <h3>Linux</h3>
+          <p class="req">64-बिट; Ubuntu 22.04 या नया, Debian, Fedora और अन्य</p>
+          <a class="btn dl" data-asset="Agni-AI-Browser-linux-amd64.deb" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-linux-amd64.deb">Ubuntu और Debian (.deb)</a>
+          <a class="alt dl" data-asset="Agni-AI-Browser-linux-x86_64.rpm" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-linux-x86_64.rpm">Fedora (.rpm)</a>
+          <a class="alt dl" data-asset="Agni-AI-Browser-linux-x86_64.AppImage" href="https://github.com/kellspell/agni-releases/releases/latest/download/Agni-AI-Browser-linux-x86_64.AppImage">अन्य डिस्ट्रीब्यूशन (AppImage)</a>
+          <p class="note">AppImage को आपके सिस्टम का <code>libfuse2</code> पैकेज चाहिए हो सकता है।</p>
+        </article>
+      </div>
+
+      <p class="fine">पहली बार खोलने पर, Agni अपने AI इंजन का एक बार का डाउनलोड ऑफ़र करता है (लगभग 1.5 GB)। <a href="https://github.com/kellspell/agni-releases/releases">सभी वर्ज़न और चेकसम</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Agni AI App Studio · लोकल पहले · लाइसेंस का ध्यान · हार्डवेयर के अनुसार</span>
+    <span>मॉडल उनके निर्माता Hugging Face और ModelScope पर प्रकाशित करते हैं।</span>
+  </div>
+</footer>
+<script>
+// Points the main download buttons at the visitor's system, and shows the
+// latest version and file sizes. Without the release (or JavaScript), the
+// per-platform links still work.
+(() => {
+  const T = {"downloadFor":"{os} के लिए डाउनलोड करें","yourSystem":"आपका सिस्टम","latestVersion":"नवीनतम वर्ज़न: {version}।","firstBuildSoon":"पहला सार्वजनिक वर्ज़न आने वाला है।","comingSoon":"डाउनलोड: जल्द आ रहा है"};
+  const DOWNLOAD = "https://github.com/kellspell/agni-releases/releases/latest/download/";
+  const PRIMARY = {
+    windows: { file: "Agni-AI-Browser-windows-x64-setup.exe", label: "Windows" },
+    macos: { file: "Agni-AI-Browser-macos-universal.dmg", label: "macOS" },
+    linux: { file: "Agni-AI-Browser-linux-amd64.deb", label: "Linux (.deb)" },
+  };
+  // Inserted names (e.g. "Linux (.deb)") are isolated so their brackets stay put in Arabic.
+  const fill = (text, values) => text.replace(/\{(\w+)\}/g, (_, k) => `\u2068${values[k]}\u2069`);
+  const ua = navigator.userAgent;
+  const os = /Windows/i.test(ua) ? "windows"
+    : /Macintosh|Mac OS X/i.test(ua) && !/iPhone|iPad/i.test(ua) ? "macos"
+    : /Linux|X11/i.test(ua) && !/Android/i.test(ua) ? "linux"
+    : null;
+  const mainButtons = ["hero-download", "main-download"].map((id) => document.getElementById(id));
+
+  if (os) {
+    for (const btn of mainButtons) {
+      btn.textContent = fill(T.downloadFor, { os: PRIMARY[os].label });
+      btn.href = DOWNLOAD + PRIMARY[os].file;
+    }
+    const card = document.querySelector(`.platform[data-os="${os}"]`);
+    card.classList.add("detected");
+    const label = document.createElement("span");
+    label.className = "detected-label";
+    label.textContent = T.yourSystem;
+    card.prepend(label);
+  }
+
+  fetch("https://api.github.com/repos/kellspell/agni-releases/releases/latest")
+    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then((release) => {
+      document.getElementById("release-version").textContent = fill(T.latestVersion, { version: release.tag_name });
+      const sizes = new Map(release.assets.map((a) => [a.name, a.size]));
+      const mb = new Intl.NumberFormat(document.documentElement.lang + "-u-nu-latn", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+      for (const link of document.querySelectorAll("a.dl")) {
+        const size = sizes.get(link.dataset.asset);
+        if (size) link.insertAdjacentHTML("beforeend", ` <span class="size">${mb.format(size / 1e6)} MB</span>`);
+        else link.classList.add("unavailable");
+      }
+    })
+    .catch((status) => {
+      if (status !== 404) return; // offline or rate-limited: leave the links as they are
+      document.getElementById("release-version").textContent = T.firstBuildSoon;
+      for (const el of [...mainButtons, ...document.querySelectorAll("a.dl")]) {
+        el.classList.add("unavailable");
+        el.setAttribute("aria-disabled", "true");
+      }
+      for (const btn of mainButtons) btn.textContent = T.comingSoon;
+    });
+})();
+
+// Language: remember a choice made in the menu, and send first-time visitors to
+// the home page in their browser's language. Search engines get English here and
+// find the other languages through the hreflang links.
+(() => {
+  const KEY = "agni.lang";
+  const save = (code) => { try { localStorage.setItem(KEY, code); } catch {} };
+  document.querySelectorAll(".lang a[hreflang]").forEach((a) => a.addEventListener("click", () => save(a.hreflang)));
+  
+})();
+</script>
+</body>
+</html>
