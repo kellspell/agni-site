@@ -1,8 +1,11 @@
 <!doctype html>
-<html lang="en">
+<!-- Generated from src/checkout.html and src/locales/*.json by build.mjs. Edit those, then run: node build.mjs -->
+<!-- Stripe returns here at a fixed address, so this page carries every language and picks one in the browser. -->
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Checkout cancelled · Agni AI App Studio</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
@@ -19,9 +22,30 @@
 <body>
 <main>
   <img src="../favicon.svg" alt="">
-  <h1>Checkout cancelled</h1>
-  <p>Nothing was charged. You can go back to Agni and upgrade any time.</p>
-  <p>You can close this tab.</p>
+  <h1 id="title">Checkout cancelled</h1>
+  <p id="text">Nothing was charged. You can go back to Agni and upgrade any time.</p>
+  <p id="close">You can close this tab.</p>
 </main>
+<script>
+// The language chosen on the site, else the browser's; English stays if neither matches.
+(() => {
+  const TEXT = {"en":{"title":"Checkout cancelled","text":"Nothing was charged. You can go back to Agni and upgrade any time.","close":"You can close this tab."},"pt-BR":{"title":"Pagamento cancelado","text":"Nada foi cobrado. Você pode voltar para o Agni e fazer upgrade quando quiser.","close":"Você pode fechar esta aba."},"es":{"title":"Pago cancelado","text":"No se ha cobrado nada. Puedes volver a Agni y mejorar tu plan cuando quieras.","close":"Puedes cerrar esta pestaña."},"fr":{"title":"Paiement annulé","text":"Rien n’a été débité. Vous pouvez retourner dans Agni et passer à l’offre supérieure quand vous voulez.","close":"Vous pouvez fermer cet onglet."},"de":{"title":"Zahlung abgebrochen","text":"Es wurde nichts berechnet. Du kannst zu Agni zurückgehen und jederzeit upgraden.","close":"Du kannst diesen Tab schließen."},"ar":{"title":"تم إلغاء الدفع","text":"لم يُخصم أي مبلغ. يمكنك العودة إلى Agni والترقية في أي وقت.","close":"يمكنك إغلاق هذا التبويب."},"hi":{"title":"भुगतान रद्द किया गया","text":"कोई शुल्क नहीं लिया गया। आप Agni पर वापस जाकर कभी भी अपग्रेड कर सकते हैं।","close":"आप यह टैब बंद कर सकते हैं।"}};
+  const RTL = ["ar"];
+  let saved = null;
+  try { saved = localStorage.getItem("agni.lang"); } catch {}
+  const codes = Object.keys(TEXT);
+  const pick = (wanted) => {
+    const w = String(wanted).toLowerCase();
+    return codes.find((c) => c.toLowerCase() === w) ?? codes.find((c) => c.split("-")[0].toLowerCase() === w.split("-")[0]);
+  };
+  const lang = [saved, ...(navigator.languages || [navigator.language])].filter(Boolean).map(pick).find(Boolean);
+  if (!lang || lang === "en") return;
+  const t = TEXT[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL.includes(lang) ? "rtl" : "ltr";
+  document.title = `${t.title} · Agni AI App Studio`;
+  for (const id of ["title", "text", "close"]) document.getElementById(id).textContent = t[id];
+})();
+</script>
 </body>
 </html>

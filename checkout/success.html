@@ -1,8 +1,11 @@
 <!doctype html>
-<html lang="en">
+<!-- Generated from src/checkout.html and src/locales/*.json by build.mjs. Edit those, then run: node build.mjs -->
+<!-- Stripe returns here at a fixed address, so this page carries every language and picks one in the browser. -->
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Thank you! · Agni AI App Studio</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
@@ -19,9 +22,30 @@
 <body>
 <main>
   <img src="../favicon.svg" alt="">
-  <h1>Thank you!</h1>
-  <p>Your payment went through. Go back to Agni: your new plan appears within a few seconds.</p>
-  <p>You can close this tab.</p>
+  <h1 id="title">Thank you!</h1>
+  <p id="text">Your payment went through. Go back to Agni: your new plan appears within a few seconds.</p>
+  <p id="close">You can close this tab.</p>
 </main>
+<script>
+// The language chosen on the site, else the browser's; English stays if neither matches.
+(() => {
+  const TEXT = {"en":{"title":"Thank you!","text":"Your payment went through. Go back to Agni: your new plan appears within a few seconds.","close":"You can close this tab."},"pt-BR":{"title":"Obrigado!","text":"Seu pagamento foi aprovado. Volte para o Agni: seu novo plano aparece em alguns segundos.","close":"Você pode fechar esta aba."},"es":{"title":"¡Gracias!","text":"Tu pago se ha completado. Vuelve a Agni: tu nuevo plan aparecerá en unos segundos.","close":"Puedes cerrar esta pestaña."},"fr":{"title":"Merci !","text":"Votre paiement est passé. Retournez dans Agni : votre nouvelle offre apparaît en quelques secondes.","close":"Vous pouvez fermer cet onglet."},"de":{"title":"Danke!","text":"Deine Zahlung ist durchgegangen. Geh zurück zu Agni: Dein neuer Tarif erscheint in wenigen Sekunden.","close":"Du kannst diesen Tab schließen."},"ar":{"title":"شكرًا لك!","text":"تمت عملية الدفع. عُد إلى Agni: ستظهر خطتك الجديدة خلال ثوانٍ.","close":"يمكنك إغلاق هذا التبويب."},"hi":{"title":"धन्यवाद!","text":"आपका भुगतान हो गया। Agni पर वापस जाएँ: आपका नया प्लान कुछ ही सेकंड में दिखेगा।","close":"आप यह टैब बंद कर सकते हैं।"}};
+  const RTL = ["ar"];
+  let saved = null;
+  try { saved = localStorage.getItem("agni.lang"); } catch {}
+  const codes = Object.keys(TEXT);
+  const pick = (wanted) => {
+    const w = String(wanted).toLowerCase();
+    return codes.find((c) => c.toLowerCase() === w) ?? codes.find((c) => c.split("-")[0].toLowerCase() === w.split("-")[0]);
+  };
+  const lang = [saved, ...(navigator.languages || [navigator.language])].filter(Boolean).map(pick).find(Boolean);
+  if (!lang || lang === "en") return;
+  const t = TEXT[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL.includes(lang) ? "rtl" : "ltr";
+  document.title = `${t.title} · Agni AI App Studio`;
+  for (const id of ["title", "text", "close"]) document.getElementById(id).textContent = t[id];
+})();
+</script>
 </body>
 </html>

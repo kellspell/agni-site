@@ -7,6 +7,9 @@ It's built in seven languages from one template:
 - `src/page.html`: the page, with `{{keys}}` where text goes
 - `src/locales/*.json`: the text for each language (`en.json` is the reference)
 - `build.mjs`: writes `index.html` (English) and `pt-br/`, `es/`, `fr/`, `de/`, `ar/`, `hi/`
+- `src/checkout.html`: Stripe's return pages (`checkout/*.html`). Stripe always returns to
+  the same address, so these carry every language and show the one chosen on the site, or
+  the browser's language (English without JavaScript)
 
 To change the page, edit those files, then run `node build.mjs` and push to `main`.
 The build stops without writing anything if a language is missing a text, or if its

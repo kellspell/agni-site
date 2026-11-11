@@ -52,7 +52,7 @@ for (const lang of LANGS) {
 }
 const usedKeys = new Set([...template.matchAll(/\{\{([\w.]+)\}\}/g)].map((m) => m[1]));
 for (const key of Object.keys(en)) {
-  if (!usedKeys.has(key) && !key.startsWith("script.") && key !== "header.language") {
+  if (!usedKeys.has(key) && !key.startsWith("script.") && !key.startsWith("checkout.") && key !== "header.language") {
     console.log(`en: ${key} isn't used in src/page.html`);
     problems++;
   }
@@ -121,4 +121,24 @@ ${LANGS.map((l) => `          <li><a href="/${l.path}" hreflang="${l.code}" lang
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, html);
   console.log(`wrote ${lang.path || ""}index.html (${lang.name})`);
+}
+
+// Stripe's return pages (checkout/*.html). Stripe always returns to the same address,
+// so each page carries every language and the browser picks one; English without JavaScript.
+const checkoutTemplate = readFileSync(join(ROOT, "src/checkout.html"), "utf8");
+const CHECKOUT_PAGES = { success: "success", cancelled: "cancelled", "portal-closed": "portal" };
+for (const [file, key] of Object.entries(CHECKOUT_PAGES)) {
+  const strings = Object.fromEntries(
+    pages.map(({ lang, t }) => [
+      lang.code,
+      { title: t[`checkout.${key}.title`], text: t[`checkout.${key}.text`], close: t["checkout.close"] },
+    ]),
+  );
+  const english = strings.en;
+  // "<" is escaped so no translation can close the script tag early.
+  const html = checkoutTemplate
+    .replace("{{@strings}}", JSON.stringify(strings).replace(/</g, "\\u003c"))
+    .replace(/\{\{(title|text|close)\}\}/g, (_, k) => english[k]);
+  writeFileSync(join(ROOT, "checkout", `${file}.html`), html);
+  console.log(`wrote checkout/${file}.html (all languages)`);
 }

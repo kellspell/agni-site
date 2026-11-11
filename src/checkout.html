@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- Generated from src/checkout.html and src/locales/*.json by build.mjs. Edit those, then run: node build.mjs -->
+<!-- Stripe returns here at a fixed address, so this page carries every language and picks one in the browser. -->
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{{title}} · Agni AI App Studio</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; box-sizing: border-box;
+         background: radial-gradient(700px 400px at 50% 0%, rgba(242, 107, 33, 0.16), transparent 65%), #0B0D12;
+         color: #ECEEF4; font: 17px/1.6 "Segoe UI", system-ui, sans-serif; text-align: center; }
+  main { max-width: 440px; display: grid; gap: 14px; justify-items: center; }
+  h1 { margin: 0; font-size: 30px; }
+  p { margin: 0; color: #9BA3B6; }
+  img { width: 64px; height: 64px; filter: drop-shadow(0 0 16px rgba(242, 107, 33, 0.45)); }
+</style>
+</head>
+<body>
+<main>
+  <img src="../favicon.svg" alt="">
+  <h1 id="title">{{title}}</h1>
+  <p id="text">{{text}}</p>
+  <p id="close">{{close}}</p>
+</main>
+<script>
+// The language chosen on the site, else the browser's; English stays if neither matches.
+(() => {
+  const TEXT = {{@strings}};
+  const RTL = ["ar"];
+  let saved = null;
+  try { saved = localStorage.getItem("agni.lang"); } catch {}
+  const codes = Object.keys(TEXT);
+  const pick = (wanted) => {
+    const w = String(wanted).toLowerCase();
+    return codes.find((c) => c.toLowerCase() === w) ?? codes.find((c) => c.split("-")[0].toLowerCase() === w.split("-")[0]);
+  };
+  const lang = [saved, ...(navigator.languages || [navigator.language])].filter(Boolean).map(pick).find(Boolean);
+  if (!lang || lang === "en") return;
+  const t = TEXT[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL.includes(lang) ? "rtl" : "ltr";
+  document.title = `${t.title} · Agni AI App Studio`;
+  for (const id of ["title", "text", "close"]) document.getElementById(id).textContent = t[id];
+})();
+</script>
+</body>
+</html>
